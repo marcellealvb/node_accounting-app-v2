@@ -19,7 +19,7 @@ function createServer() {
 
   app.get('/users/:id', (req, res) => {
     // const { id } = req.params;
-    const id = Number(req.params.id);
+    const id = req.params.id;
 
     const user = users.find(user => user.id === id);
 
@@ -50,7 +50,7 @@ function createServer() {
 
   app.patch('/users/:id', (req, res) => {
     //  const { id } = req.params;
-    const id = Number(req.params.id);
+    const id = req.params.id;
 
     const { name } = req.body;
     if (!name) {
@@ -62,7 +62,7 @@ function createServer() {
       return res.status(404).send('User not found');
     }
 
-    users.name = name;
+    user.name = name;
 
     res.json(user);
 
@@ -70,10 +70,10 @@ function createServer() {
 
   app.delete('/users/:id', (req, res) => {
     // const { id } = req.params;
-    const id = Number(req.params.id);
+    const id = req.params.id;
     const OriginalLength = users.length;
 
-    filteredUsers = users.filter(user => user.id !== id);
+    const filteredUsers = users.filter(user => user.id !== id);
 
     if (OriginalLength === filteredUsers.length) {
       return res.status(404).send('User not found');
